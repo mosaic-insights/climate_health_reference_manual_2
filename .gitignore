@@ -1,0 +1,9 @@
+Inputs/health_district_merged.json
+Inputs/australian_pop_grid_2024/apg24r_1_0_0_19115-3_metadata.xml
+Inputs/australian_pop_grid_2024/apg24e_1_0_0.tif.xml
+Inputs/australian_pop_grid_2024/apg24e_1_0_0.tif.aux.xml
+Inputs/australian_pop_grid_2024/apg24e_1_0_0.tif
+.ipynb_checkpoints/netcdf_wrangle-checkpoint.ipynb
+Inputs/australian_pop_grid_2024/apg24e_1_0_0.tif
+Outputs/districts_output.geojson
+Inputs/health_district_merged.json
