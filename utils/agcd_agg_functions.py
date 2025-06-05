@@ -366,7 +366,7 @@ def calculate_avg_ehf_days(tmean, t95_hist, rolling_3day=3, rolling_30day=30):
 
     return avg_ehf_days
 
-def summarise_heatwaves_per_year(ehf, threshold=0):
+def summarise_heatwaves(ehf, threshold=0):
     """
     Summarise heatwave statistics (average events/year and duration) from EHF data.
 
@@ -377,7 +377,7 @@ def summarise_heatwaves_per_year(ehf, threshold=0):
     threshold : float, optional
         EHF threshold to define a heatwave day (default = 0).
 
-    Returns
+    Returns:
     -------
     dict of xarray.DataArray
         {
@@ -430,10 +430,6 @@ def summarise_heatwaves_per_year(ehf, threshold=0):
         'avg_events_per_year': avg_events_per_year,
         'avg_duration': avg_duration
     }
-
-
-    
-
 
 def calculate_mean(var):
     """
