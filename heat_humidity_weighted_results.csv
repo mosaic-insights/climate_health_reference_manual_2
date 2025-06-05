@@ -1,0 +1,121 @@
+,district_id,district_name,model,ssp,epoch,metric,value
+0,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,heatwaves_avg_events_per_year,5.605291603810052
+1,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,heatwaves_avg_events_per_year,4.084564343827063
+2,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,heatwaves_avg_events_per_year,3.081452358148828
+3,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,heatwaves_avg_duration,6.517543149544354
+4,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,heatwaves_avg_duration,4.491598940470016
+5,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,heatwaves_avg_duration,4.788582855658953
+6,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,heatwaves_avg_events_per_year,6.7783086168542654
+7,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,heatwaves_avg_events_per_year,5.936956838845735
+8,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,heatwaves_avg_events_per_year,3.750747607376157
+9,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,heatwaves_avg_duration,8.106602777119125
+10,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,heatwaves_avg_duration,4.990336777678477
+11,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,heatwaves_avg_duration,4.975789006685465
+12,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,heatwaves_avg_events_per_year,6.786243796756788
+13,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,heatwaves_avg_events_per_year,6.159728559217541
+14,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,heatwaves_avg_events_per_year,3.5455608370923297
+15,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,heatwaves_avg_duration,7.535824855934724
+16,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,heatwaves_avg_duration,5.089307446287203
+17,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,heatwaves_avg_duration,4.87353258133929
+18,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,heatwaves_avg_events_per_year,8.399505456234888
+19,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,heatwaves_avg_events_per_year,8.27639756093635
+20,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,heatwaves_avg_events_per_year,4.8048447867834305
+21,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,heatwaves_avg_duration,10.22841001762174
+22,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,heatwaves_avg_duration,6.060823594734852
+23,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,heatwaves_avg_duration,5.125227777781985
+24,NSW_7,Northern NSW,Historical,Historical,Historical,heatwaves_avg_events_per_year,2.143094451875617
+25,NSW_9,Western Sydney,Historical,Historical,Historical,heatwaves_avg_events_per_year,1.7642932415140091
+26,SA_5,Eyre and Far North,Historical,Historical,Historical,heatwaves_avg_events_per_year,1.6042028726781699
+27,NSW_7,Northern NSW,Historical,Historical,Historical,heatwaves_avg_duration,4.831476988258662
+28,NSW_9,Western Sydney,Historical,Historical,Historical,heatwaves_avg_duration,3.9166383340703006
+29,SA_5,Eyre and Far North,Historical,Historical,Historical,heatwaves_avg_duration,4.520263359005371
+30,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,pc_max_95,32.87174661044651
+31,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,pc_max_95,34.618224580850125
+32,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,pc_max_95,38.133385238815
+33,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,pc_max_95,33.83721736531627
+34,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,pc_max_95,35.84976022606422
+35,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,pc_max_95,38.59784366051367
+36,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,pc_max_95,33.95529932578597
+37,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,pc_max_95,36.40985731917565
+38,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,pc_max_95,38.56148587693188
+39,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,pc_max_95,34.883992928771605
+40,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,pc_max_95,37.11802466530497
+41,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,pc_max_95,39.59619337269008
+42,NSW_7,Northern NSW,Historical,Historical,Historical,pc_max_95,31.060758590698242
+43,NSW_9,Western Sydney,Historical,Historical,Historical,pc_max_95,33.139122009277344
+44,SA_5,Eyre and Far North,Historical,Historical,Historical,pc_max_95,36.56184768676758
+45,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,pc_min_95,23.248575230127276
+46,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,pc_min_95,21.963056625804636
+47,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,pc_min_95,21.21353317143917
+48,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,pc_min_95,23.736925950106674
+49,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,pc_min_95,22.53646044127926
+50,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,pc_min_95,21.827893440200206
+51,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,pc_min_95,23.483429048713027
+52,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,pc_min_95,22.40929537807715
+53,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,pc_min_95,21.523244631363482
+54,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,pc_min_95,24.837209041191493
+55,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,pc_min_95,23.579810788682803
+56,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,pc_min_95,22.52728199085561
+57,NSW_7,Northern NSW,Historical,Historical,Historical,pc_min_95,21.847509384155273
+58,NSW_9,Western Sydney,Historical,Historical,Historical,pc_min_95,20.51513671875
+59,SA_5,Eyre and Far North,Historical,Historical,Historical,pc_min_95,19.886430740356445
+60,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,mean_heat_index,35.46324243927197
+61,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,mean_heat_index,36.00787048813622
+62,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,mean_heat_index,36.761648816918985
+63,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,mean_heat_index,36.48579619034435
+64,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,mean_heat_index,36.7529711894544
+65,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,mean_heat_index,37.04890614828243
+66,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,mean_heat_index,36.311622266614926
+67,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,mean_heat_index,37.04389022030969
+68,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,mean_heat_index,37.10189422100294
+69,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,mean_heat_index,37.71723510821507
+70,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,mean_heat_index,37.97505038034822
+71,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,mean_heat_index,37.352719275976916
+72,NSW_7,Northern NSW,Historical,Historical,Historical,mean_heat_index,34.407249450683594
+73,NSW_9,Western Sydney,Historical,Historical,Historical,mean_heat_index,34.87824630737305
+74,SA_5,Eyre and Far North,Historical,Historical,Historical,mean_heat_index,36.01511001586914
+75,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,mean_temp,21.068316683711558
+76,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,mean_temp,19.37019982367961
+77,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,mean_temp,18.949074473504528
+78,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,mean_temp,21.655662250909348
+79,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,mean_temp,20.043383481722135
+80,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,mean_temp,19.46636063587474
+81,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,mean_temp,21.480106089133972
+82,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,mean_temp,19.912778776005613
+83,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,mean_temp,19.2052677884562
+84,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,mean_temp,22.591681998244617
+85,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,mean_temp,21.102487767422094
+86,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,mean_temp,20.30537702670733
+87,NSW_7,Northern NSW,Historical,Historical,Historical,mean_temp,19.464004516601562
+88,NSW_9,Western Sydney,Historical,Historical,Historical,mean_temp,17.803922653198242
+89,SA_5,Eyre and Far North,Historical,Historical,Historical,mean_temp,17.567485809326172
+90,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,avg_hot_days_35,10.040409344576558
+91,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,avg_hot_days_35,16.743216266391862
+92,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,avg_hot_days_35,44.89554659228397
+93,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,mid,avg_hot_days_40,0.917119435506805
+94,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,mid,avg_hot_days_40,2.123696497969405
+95,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,mid,avg_hot_days_40,13.847128394257801
+96,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,avg_hot_days_35,14.567077725396363
+97,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,avg_hot_days_35,24.080182602070447
+98,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,avg_hot_days_35,49.72689380720737
+99,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp245,late,avg_hot_days_40,1.9059931151703549
+100,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp245,late,avg_hot_days_40,3.815310464069002
+101,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp245,late,avg_hot_days_40,16.583761145844996
+102,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,avg_hot_days_35,15.983156586881783
+103,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,avg_hot_days_35,27.798132978230303
+104,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,avg_hot_days_35,48.6380919354149
+105,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,mid,avg_hot_days_40,2.085909507668036
+106,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,mid,avg_hot_days_40,5.488890040580509
+107,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,mid,avg_hot_days_40,16.11065748440949
+108,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,avg_hot_days_35,21.689904982405388
+109,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,avg_hot_days_35,33.35657078673953
+110,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,avg_hot_days_35,57.584845949310306
+111,NSW_7,Northern NSW,ACCESS-ESM1-5,ssp370,late,avg_hot_days_40,3.2435024236905896
+112,NSW_9,Western Sydney,ACCESS-ESM1-5,ssp370,late,avg_hot_days_40,6.8930705381856034
+113,SA_5,Eyre and Far North,ACCESS-ESM1-5,ssp370,late,avg_hot_days_40,23.18140101503106
+114,NSW_7,Northern NSW,Historical,Historical,Historical,avg_hot_days_35,4.757524275289617
+115,NSW_9,Western Sydney,Historical,Historical,Historical,avg_hot_days_35,10.422838951301916
+116,SA_5,Eyre and Far North,Historical,Historical,Historical,avg_hot_days_35,32.1571222710043
+117,NSW_7,Northern NSW,Historical,Historical,Historical,avg_hot_days_40,0.33466333296225675
+118,NSW_9,Western Sydney,Historical,Historical,Historical,avg_hot_days_40,1.0679896349937499
+119,SA_5,Eyre and Far North,Historical,Historical,Historical,avg_hot_days_40,7.052729869933264

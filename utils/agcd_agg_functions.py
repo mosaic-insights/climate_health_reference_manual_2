@@ -5,6 +5,8 @@ import dask
 from rasterio.features import geometry_mask
 from shapely.geometry import shape
 import pandas as pd
+import dill
+import os
 
 dask.config.set(array__slicing__split_large_chunks=True)
 
@@ -14,6 +16,34 @@ def assign_summer_year(time):
     year = time.dt.year
     month = time.dt.month
     return xr.where(month == 12, year + 1, year)
+
+def checkpoint_update(file_path, new_data, overwrite=False):
+    """
+    Update or overwrite a dill-based checkpoint (.pkl file) with new dictionary content.
+
+    Parameters
+    ----------
+    file_path : str
+        Path to the pickle file to update.
+    new_data : dict
+        Dictionary of new key-value pairs to save or merge into the existing file.
+    overwrite : bool, optional
+        If True, completely overwrite the existing file. If False (default), merge into existing content.
+    """
+    if overwrite or not os.path.exists(file_path):
+        # Write from scratch
+        with open(file_path, 'wb') as f:
+            dill.dump(new_data, f)
+    else:
+        # Load existing and update
+        with open(file_path, 'rb') as f:
+            existing_data = dill.load(f)
+        existing_data.update(new_data)
+        # Save back safely
+        tmp_path = file_path + '.tmp'
+        with open(tmp_path, 'wb') as f:
+            dill.dump(existing_data, f)
+        os.replace(tmp_path, file_path)
 
 def load_var(path, varname, bbox_geom=None, chunk=True):
     """
