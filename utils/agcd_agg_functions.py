@@ -3,7 +3,7 @@ import dask.array as da
 import numpy as np
 import dask
 from rasterio.features import geometry_mask
-from shapely.geometry import shape
+from shapely.geometry import shape, mapping
 import pandas as pd
 import dill
 import os
@@ -538,6 +538,63 @@ def export_raster(ds, output_path, x='lon', y='lat', crs='EPSG:4326'):
         ds.rio.set_spatial_dims(x_dim=x, y_dim=y, inplace=True)
 
     ds.rio.to_raster(output_path)
+
+
+def zonal_weighted_mean_time_series(ncdf, weights, zones, affine, idcol):
+    """
+    Compute daily population-weighted means for each polygonal zone using 
+    Dask-aware xarray operations.
+
+    Parameters
+    ----------
+    ncdf: xarray.DataArray
+        Climate variable NetCDF with dimensions (time, lat, lon), e.g., daily sfcWindmax.
+    weights : xarray.DataArray
+        2D array of aligned weights (lat, lon).
+    zones : geopandas.GeoDataFrame
+        GeoDataFrame containing polygon geometries representing each zone
+        (e.g., health districts).
+    affine : affine.Affine
+        Affine transformation for the spatial grid (must match raster and pop_array).
+    idcol : string
+        zone ID column name to assign to output dataframe column names
+
+    Returns
+    -------
+    pandas.DataFrame
+        A DataFrame with dates as the index and one column per health district,
+        containing the population-weighted mean value for each day and zone.
+    """
+    shapes = [mapping(geom) for geom in zones.geometry]
+
+    zone_results = {}
+
+    for i, zone in enumerate(shapes):
+        mask = geometry_mask([zone], transform=affine, invert=True, out_shape=weights.shape)
+        mask_da = xr.DataArray(~mask, coords=weights.coords, dims=weights.dims)
+
+        # Slice the original arrays to avoid broadcasting huge arrays
+        masked_data = ncdf.where(mask_da)
+        masked_weights = weights.where(mask_da)
+
+        # Now chunk per-zone after masking
+        masked_data = masked_data.chunk({'lat': 'auto', 'lon': 'auto'})
+        masked_weights = masked_weights.chunk({'lat': 'auto', 'lon': 'auto'})
+
+        weighted_mean = (masked_data * masked_weights).sum(dim=['lat', 'lon']) / masked_weights.sum(dim=['lat', 'lon']).compute()
+
+        zone_name = zones.iloc[i][idcol]
+        print(f'{zone_name} computed')
+        
+        zone_results[zone_name] = weighted_mean.to_series()
+
+    df = pd.DataFrame(zone_results)
+    df.index.name = 'date'
+    df = df.reset_index() # convert date from index to column
+    
+    return df
+
+
 
 
 
