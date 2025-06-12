@@ -571,7 +571,7 @@ def zonal_weighted_mean_time_series(ncdf, weights, zones, affine, idcol):
 
     for i, zone in enumerate(shapes):
         mask = geometry_mask([zone], transform=affine, invert=True, out_shape=weights.shape)
-        mask_da = xr.DataArray(~mask, coords=weights.coords, dims=weights.dims)
+        mask_da = xr.DataArray(mask, coords=weights.coords, dims=weights.dims)
 
         # Slice the original arrays to avoid broadcasting huge arrays
         masked_data = ncdf.where(mask_da)
@@ -584,7 +584,7 @@ def zonal_weighted_mean_time_series(ncdf, weights, zones, affine, idcol):
         weighted_mean = (masked_data * masked_weights).sum(dim=['lat', 'lon']) / masked_weights.sum(dim=['lat', 'lon']).compute()
 
         zone_name = zones.iloc[i][idcol]
-        print(f'{zone_name} computed')
+        #print(f'{zone_name} computed')
         
         zone_results[zone_name] = weighted_mean.to_series()
 
@@ -593,6 +593,42 @@ def zonal_weighted_mean_time_series(ncdf, weights, zones, affine, idcol):
     df = df.reset_index() # convert date from index to column
     
     return df
+
+def zonal_mean_time_series(ncdf, zones, affine, idcol):
+    """
+    Compute daily unweighted mean for each polygonal zone using original structure.
+
+    Parameters
+    ----------
+    ncdf : xarray.DataArray
+        Climate variable with dimensions (time, lat, lon).
+    zones : geopandas.GeoDataFrame
+        Zones for aggregation.
+    affine : affine.Affine
+        Affine transform matching ncdf grid.
+    idcol : str
+        Name of the column with zone identifiers.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Time series DataFrame with one column per zone.
+    """
+    shapes = [mapping(geom) for geom in zones.geometry]
+    results = {}
+
+    for i, geom in enumerate(shapes):
+        zone_name = zones.iloc[i][idcol]
+
+        mask = geometry_mask([geom], transform=affine, invert=True, out_shape=ncdf.shape[1:])
+        mask_da = xr.DataArray(~mask, coords={'lat': ncdf.lat, 'lon': ncdf.lon}, dims=('lat', 'lon'))
+
+        mean_ts = ncdf.where(mask_da).mean(dim=['lat', 'lon'])
+
+        results[zone_name] = mean_ts.compute().to_series()
+
+    df = pd.DataFrame(results)
+    df.index.name = 'date'
 
 
 
