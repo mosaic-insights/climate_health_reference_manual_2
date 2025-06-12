@@ -7,6 +7,7 @@ from shapely.geometry import shape, mapping
 import pandas as pd
 import dill
 import os
+from concurrent.futures import ThreadPoolExecutor
 
 dask.config.set(array__slicing__split_large_chunks=True)
 
@@ -542,58 +543,54 @@ def export_raster(ds, output_path, x='lon', y='lat', crs='EPSG:4326'):
 
 def zonal_weighted_mean_time_series(ncdf, weights, zones, affine, idcol):
     """
-    Compute daily population-weighted means for each polygonal zone using 
-    Dask-aware xarray operations.
+    Compute daily population-weighted mean values for each polygonal zone in parallel using ThreadPoolExecutor.
 
     Parameters
     ----------
-    ncdf: xarray.DataArray
-        Climate variable NetCDF with dimensions (time, lat, lon), e.g., daily sfcWindmax.
+    ncdf : xarray.DataArray
+        Climate variable NetCDF with dimensions (time, lat, lon).
     weights : xarray.DataArray
-        2D array of aligned weights (lat, lon).
+        2D array of aligned weights (lat, lon), e.g., population.
     zones : geopandas.GeoDataFrame
-        GeoDataFrame containing polygon geometries representing each zone
-        (e.g., health districts).
+        Polygon geometries for each zone (e.g., health districts).
     affine : affine.Affine
-        Affine transformation for the spatial grid (must match raster and pop_array).
-    idcol : string
-        zone ID column name to assign to output dataframe column names
+        Affine transformation matching the spatial grid of the weights.
+    idcol : str
+        Column name in zones for unique zone identifiers.
 
     Returns
     -------
     pandas.DataFrame
-        A DataFrame with dates as the index and one column per health district,
-        containing the population-weighted mean value for each day and zone.
+        DataFrame with dates as index and zone IDs as columns, containing
+        population-weighted mean values for each zone per day.
     """
-    shapes = [mapping(geom) for geom in zones.geometry]
-
-    zone_results = {}
-
-    for i, zone in enumerate(shapes):
-        mask = geometry_mask([zone], transform=affine, invert=True, out_shape=weights.shape)
+    def compute_zone_weighted_mean(zone_geom, zone_name):
+        mask = geometry_mask([mapping(zone_geom)], transform=affine, invert=True, out_shape=weights.shape)
         mask_da = xr.DataArray(~mask, coords=weights.coords, dims=weights.dims)
 
-        # Slice the original arrays to avoid broadcasting huge arrays
         masked_data = ncdf.where(mask_da)
         masked_weights = weights.where(mask_da)
 
-        # Now chunk per-zone after masking
-        masked_data = masked_data.chunk({'lat': 'auto', 'lon': 'auto'})
-        masked_weights = masked_weights.chunk({'lat': 'auto', 'lon': 'auto'})
+        weighted = (masked_data * masked_weights).sum(dim=['lat', 'lon']) / masked_weights.sum(dim=['lat', 'lon'])
+        weighted = weighted.compute()
 
-        weighted_mean = (masked_data * masked_weights).sum(dim=['lat', 'lon']) / masked_weights.sum(dim=['lat', 'lon']).compute()
+        return str(zone_name), pd.Series(weighted.values, index=weighted['time'].values, name=zone_name)
 
-        zone_name = zones.iloc[i][idcol]
-        print(f'{zone_name} computed')
-        
-        zone_results[zone_name] = weighted_mean.to_series()
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = [
+            executor.submit(
+                compute_zone_weighted_mean,
+                zones.geometry.iloc[i],
+                zones.iloc[i][idcol]
+            )
+            for i in range(len(zones))
+        ]
+        results = [f.result() for f in futures]
 
-    df = pd.DataFrame(zone_results)
-    df.index.name = 'date'
-    df = df.reset_index() # convert date from index to column
-    
-    return df
-
+    zone_series = {name: series for name, series in results}
+    df = pd.DataFrame(zone_series)
+    df.index.name = "time"
+    return df.reset_index()
 
 
 
