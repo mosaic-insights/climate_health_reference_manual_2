@@ -590,13 +590,12 @@ def zonal_weighted_mean_time_series(ncdf, weights, zones, affine, idcol):
 
     df = pd.DataFrame(zone_results)
     df.index.name = 'date'
-    df = df.reset_index() # convert date from index to column
     
-    return df
+    return df.reset_index()
 
 def zonal_mean_time_series(ncdf, zones, affine, idcol):
     """
-    Compute daily unweighted mean for each polygonal zone using original structure.
+    Compute daily unweighted mean for each polygonal zone
 
     Parameters
     ----------
@@ -621,7 +620,7 @@ def zonal_mean_time_series(ncdf, zones, affine, idcol):
         zone_name = zones.iloc[i][idcol]
 
         mask = geometry_mask([geom], transform=affine, invert=True, out_shape=ncdf.shape[1:])
-        mask_da = xr.DataArray(~mask, coords={'lat': ncdf.lat, 'lon': ncdf.lon}, dims=('lat', 'lon'))
+        mask_da = xr.DataArray(mask, coords={'lat': ncdf.lat, 'lon': ncdf.lon}, dims=('lat', 'lon'))
 
         mean_ts = ncdf.where(mask_da).mean(dim=['lat', 'lon'])
 
@@ -629,6 +628,46 @@ def zonal_mean_time_series(ncdf, zones, affine, idcol):
 
     df = pd.DataFrame(results)
     df.index.name = 'date'
+
+
+def zonal_maximum_time_series(ncdf, zones, affine, idcol):
+    """
+    Compute daily maximum for each polygonal zone
+
+    Parameters
+    ----------
+    ncdf : xarray.DataArray
+        Climate variable with dimensions (time, lat, lon).
+    zones : geopandas.GeoDataFrame
+        Zones for aggregation.
+    affine : affine.Affine
+        Affine transform matching ncdf grid.
+    idcol : str
+        Name of the column with zone identifiers.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Time series DataFrame with one column per zone.
+    """
+    shapes = [mapping(geom) for geom in zones.geometry]
+    results = {}
+
+    for i, geom in enumerate(shapes):
+        zone_name = zones.iloc[i][idcol]
+
+        mask = geometry_mask([geom], transform=affine, invert=True, out_shape=ncdf.shape[1:])
+        mask_da = xr.DataArray(mask, coords={'lat': ncdf.lat, 'lon': ncdf.lon}, dims=('lat', 'lon'))
+
+        max_ts = ncdf.where(mask_da).max(dim=['lat', 'lon'])
+
+        results[zone_name] = max_ts.compute().to_series()
+
+    df = pd.DataFrame(results)
+    df.index.name = 'date'
+    return df.reset_index()
+
+
 
 
 
