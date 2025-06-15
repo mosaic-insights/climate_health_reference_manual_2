@@ -661,11 +661,19 @@ def zonal_maximum_time_series(ncdf, zones, affine, idcol):
 
         max_ts = ncdf.where(mask_da).max(dim=['lat', 'lon'])
 
-        results[zone_name] = max_ts.compute().to_series()
+        results[zone_name] = max_ts
 
-    df = pd.DataFrame(results)
-    df.index.name = 'date'
-    return df.reset_index()
+    comb = xr.Dataset(results).compute()
+
+    df = (
+        comb
+        .to_dataframe()
+        .reset_index()
+        .rename(columns={'time': 'date'})
+        .drop(columns=['spatial_ref'], errors='ignore')
+    )
+    
+    return df
 
 
 
